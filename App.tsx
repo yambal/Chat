@@ -9,7 +9,6 @@ import { DefaultTheme, Provider as PaperProvider, Button } from 'react-native-pa
 
 import Test from './container/Test'
 
-
 const theme = {
   ...DefaultTheme,
   roundness: 2,

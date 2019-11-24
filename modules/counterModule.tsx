@@ -50,9 +50,9 @@ export interface iCounterState {
    */
   const add = (add: number) => {
     return (dispatch:any) => {
-      setTimeout(() => {
+      //setTimeout(() => {
         dispatch(addAction(add));
-      }, 1000);
+      //}, 1000);
     };
   }
   

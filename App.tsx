@@ -8,6 +8,7 @@ import store from './redux/store'
 import { DefaultTheme, Provider as PaperProvider, Button } from 'react-native-paper';
 
 import Test from './container/Test'
+import Firebase from './container/Firebase';
 
 const theme = {
   ...DefaultTheme,
@@ -23,7 +24,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PaperProvider theme={theme}>
-        <Test />
+        <Firebase />
       </PaperProvider>
     </Provider>
   );

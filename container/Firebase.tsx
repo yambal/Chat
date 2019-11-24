@@ -1,16 +1,32 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import * as firebase from 'firebase'
-import * as Facebook from 'expo-facebook';
+// import * as Facebook from 'expo-facebook';
 import { TextInput, Button } from 'react-native-paper';
 import { View } from 'react-native';
+import iRootState from '../redux/rootState';
+
+import { 
+  FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN,
+  FIREBASE_DATABASE_URL,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_STRAGE_BUCKET
+} from 'react-native-dotenv'
 
 const FIREBASE_CONST = {
-
+    apiKey: FIREBASE_API_KEY,
+    authDomain: FIREBASE_AUTH_DOMAIN,
+    databaseURL: FIREBASE_DATABASE_URL,
+    projectId: FIREBASE_PROJECT_ID,
+    storageBucket: FIREBASE_STRAGE_BUCKET
 }
 
 firebase.initializeApp(FIREBASE_CONST)
 
 const Firebase:React.FC = () => {
+
+
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 
@@ -87,4 +103,13 @@ const Firebase:React.FC = () => {
   )
 }
 
-export default Firebase
+const mapStateToProps = (state:iRootState) => {
+  return {
+    FIREBASE_API_KEY: state.config.FIREBASE_API_KEY
+  }
+}
+
+const mapDispatchToProps = {
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Firebase)

@@ -9,6 +9,7 @@ import { Button } from 'react-native-paper';
 import { withTheme } from 'react-native-paper';
 
 import counterModule from '../modules/counterModule';
+import { iConfigState } from '../modules/configModule';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
 });
 
 interface iTest{
+  config: iConfigState
   count: number
   add: (n: number) => void
 }
@@ -47,7 +49,8 @@ const Test:React.FC<iTest> = props => {
 
 const mapStateToProps = (state:iRootState) => {
   return {
-    count: state.counter.count
+    count: state.counter.count,
+    config: state.config
   }
 }
 

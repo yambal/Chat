@@ -5,6 +5,11 @@ import { iRootState } from '../redux/rootState'
 
 import { StyleSheet, Text, View } from 'react-native';
 
+import { Button } from 'react-native-paper';
+import { withTheme } from 'react-native-paper';
+
+import counterModule from '../modules/counterModule';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -16,12 +21,26 @@ const styles = StyleSheet.create({
 
 interface iTest{
   count: number
+  add: (n: number) => void
 }
 
 const Test:React.FC<iTest> = props => {
+  const handleAdd = React.useCallback(
+    () => {
+      props.add(1)
+    },
+    []
+  )
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app! {props.count}</Text>
+      <Text>[{props.count}]</Text>
+      <Button
+        icon="camera"
+        mode="contained"
+        onPress={handleAdd}
+      >
+        Press Me
+      </Button>
     </View>
   )
 }
@@ -33,6 +52,7 @@ const mapStateToProps = (state:iRootState) => {
 }
 
 const mapDispatchToProps = {
+  add: counterModule.actionCreators.add
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test)
+export default withTheme(connect(mapStateToProps, mapDispatchToProps)(Test))

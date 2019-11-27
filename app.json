@@ -24,7 +24,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "net.yambal.chat",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.272157910356-4aak5hvtks8m7ekgjc3pb6on256cgfgf"
+        }
+      }
+    },
+    "android": {
+      "package": "net.yambal.chat",
+      "googleServicesFile": "./google-services.json"
+    },
+    "description": ""
   }
 }

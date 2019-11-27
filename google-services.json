@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "272157910356",
+    "firebase_url": "https://chat-f72f3.firebaseio.com",
+    "project_id": "chat-f72f3",
+    "storage_bucket": "chat-f72f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272157910356:android:2c9add231b19b36b5114c1",
+        "android_client_info": {
+          "package_name": "net.yambal.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272157910356-ie8n44j4lc7q98v0ve7svj9ib04rkiof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCptiUyhlU0f8Xmh4Zs-A4_cWDrBH0pYK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272157910356-ie8n44j4lc7q98v0ve7svj9ib04rkiof.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "272157910356-4aak5hvtks8m7ekgjc3pb6on256cgfgf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "net.yambal.chat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

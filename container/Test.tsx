@@ -35,7 +35,7 @@ const Test:React.FC<iTest> = props => {
   )
   return (
     <View style={styles.container}>
-      <Text>[{props.count}], {props.config.testString}</Text>
+      <Text>[{props.count}]</Text>
       <Button
         icon="camera"
         mode="contained"

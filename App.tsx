@@ -8,7 +8,7 @@ import store from './redux/store'
 import { DefaultTheme, Provider as PaperProvider, Button } from 'react-native-paper';
 
 import Test from './container/Test'
-
+import Location from './container/Location'
 
 const theme = {
   ...DefaultTheme,
@@ -25,6 +25,7 @@ export default function App() {
     <Provider store={store}>
       <PaperProvider theme={theme}>
         <Test />
+        <Location />
       </PaperProvider>
     </Provider>
   );

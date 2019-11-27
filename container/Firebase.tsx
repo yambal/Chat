@@ -6,6 +6,7 @@ import { TextInput, Button } from 'react-native-paper';
 import { View } from 'react-native';
 import iRootState from '../redux/rootState';
 
+
 import { 
   FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN,

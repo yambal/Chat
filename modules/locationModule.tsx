@@ -4,22 +4,27 @@ import { Platform, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
+/** https://docs.expo.io/versions/latest/sdk/location/ */
+
 /**
  * interfaces
  */
 export interface iLocationState {
+  permission: Permissions.PermissionResponse
   location: any
 }
 
 export interface iAddToCountAction {
   type: string
-  location: any
+  location?: any
+  permission?: Permissions.PermissionResponse
 }
 
 /**
  * State
  */
 const initial:iLocationState = {
+  permission: null,
   location: null
 }
 
@@ -27,6 +32,7 @@ const initial:iLocationState = {
  * Action Constructor
  */
 const LOCATION_ACTIONS = {
+  CHECKED_PERMISSION: 'checked permission',
   GET_ACTIONS : 'LOCATION_ACTIONS_GET_ACTIONSE'
 }
 
@@ -35,9 +41,12 @@ const LOCATION_ACTIONS = {
  */
 const reducer = (state: iLocationState = initial, action: iAddToCountAction) => {
   console.log(36, action)
-    switch (action.type) {
-      default: return state
-    }
+  switch (action.type) {
+    case LOCATION_ACTIONS.CHECKED_PERMISSION:
+        return Object.assign({}, state, { permission: action.permission });
+      break
+    default: return state
+  }
 }
 
 /**
@@ -50,23 +59,40 @@ const getLocationAction = (location:any):iAddToCountAction => {
   };
 }
 
+const checkedPermissionAction = (permission:Permissions.PermissionResponse) => {
+  return {
+    type: LOCATION_ACTIONS.CHECKED_PERMISSION,
+    permission
+  };
+}
+
 /**
  * Action creator
  */
+
 const _getLocationAsync = () => {
   return new Promise(async(resolve, reject) => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-
-    console.log(57, status)
+    /*
     if (status !== 'granted') {
       reject('Permission to access location was denied')
     }
-
+    */
     Location.getCurrentPositionAsync({})
       .then((location:any) => {
         resolve(location)
       })
   })
+}
+
+
+/** 権限を確認する */
+const checkPermission = () => {
+  console.log('checkPermission')
+  return async (dispatch:any) => {
+    const permission = await Permissions.askAsync(Permissions.LOCATION)
+    console.log(JSON.stringify(permission, null, 2))
+    checkedPermissionAction(permission)
+  }
 }
 
 const getLocation = () => {
@@ -83,6 +109,7 @@ const locationModule = {
   initial,
   reducer,
   actionCreators: {
+    checkPermission,
     getLocation
   }
 }

@@ -3,13 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { iRootState } from '../redux/rootState'
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Permission } from 'react-native';
 
 import { Button } from 'react-native-paper';
 import { withTheme } from 'react-native-paper';
 
 import locationModule from '../modules/locationModule';
-import { iConfigState } from '../modules/configModule';
+import * as Permissions from 'expo-permissions';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,13 +21,16 @@ const styles = StyleSheet.create({
 });
 
 interface iLocation{
+  permission: Permissions.PermissionResponse
+  checkPermission: () => void
   getLocation: () => void
 }
 
 const Location:React.FC<iLocation> = props => {
   const handleGetLocation = React.useCallback(
     () => {
-      props.getLocation()
+      props.checkPermission()
+      //props.getLocation()
     },
     []
   )
@@ -40,16 +43,19 @@ const Location:React.FC<iLocation> = props => {
       >
         Get Location
       </Button>
+      <Text>{props.permission}</Text>
     </View>
   )
 }
 
 const mapStateToProps = (state:iRootState) => {
   return {
+    permission: state.location.permission
   }
 }
 
 const mapDispatchToProps = {
+  checkPermission: locationModule.actionCreators.checkPermission,
   getLocation: locationModule.actionCreators.getLocation
 }
 

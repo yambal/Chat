@@ -22,18 +22,33 @@ const styles = StyleSheet.create({
 
 interface iLocation{
   permission: Permissions.PermissionResponse
+  location: any
   checkPermission: () => void
   getLocation: () => void
+  watchLocation: () => void
 }
 
 const Location:React.FC<iLocation> = props => {
   const handleGetLocation = React.useCallback(
     () => {
       props.checkPermission()
-      //props.getLocation()
     },
     []
   )
+
+  const handleWatchLocation = React.useCallback(
+    () => {
+      props.watchLocation()
+    },
+    []
+  )
+
+  React.useEffect(() => {
+    console.log('props.permission')
+    console.log(JSON.stringify(props.permission))
+  },[props.permission]);
+
+
   return (
     <View style={styles.container}>
       <Button
@@ -43,20 +58,30 @@ const Location:React.FC<iLocation> = props => {
       >
         Get Location
       </Button>
-      <Text>{props.permission}</Text>
+      <Text>{props.permission ? JSON.stringify(props.permission) : 'none permission'}</Text>
+      <Button
+        icon="camera"
+        mode="contained"
+        onPress={handleWatchLocation}
+      >
+        Watch Location
+      </Button>
+      <Text>{props.location ? JSON.stringify(props.location) : 'none location'}</Text>
     </View>
   )
 }
 
 const mapStateToProps = (state:iRootState) => {
   return {
-    permission: state.location.permission
+    permission: state.location.permission,
+    location: state.location.location
   }
 }
 
 const mapDispatchToProps = {
   checkPermission: locationModule.actionCreators.checkPermission,
-  getLocation: locationModule.actionCreators.getLocation
+  getLocation: locationModule.actionCreators.getLocation,
+  watchLocation: locationModule.actionCreators.watchPosition
 }
 
 export default withTheme(connect(mapStateToProps, mapDispatchToProps)(Location))

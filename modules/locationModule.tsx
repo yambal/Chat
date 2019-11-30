@@ -33,6 +33,7 @@ const initial:iLocationState = {
  */
 const LOCATION_ACTIONS = {
   CHECKED_PERMISSION: 'checked permission',
+  ON_LOCATION: 'on location',
   GET_ACTIONS : 'LOCATION_ACTIONS_GET_ACTIONSE'
 }
 
@@ -43,8 +44,9 @@ const reducer = (state: iLocationState = initial, action: iAddToCountAction) => 
   console.log(36, action)
   switch (action.type) {
     case LOCATION_ACTIONS.CHECKED_PERMISSION:
-        return Object.assign({}, state, { permission: action.permission });
-      break
+      return Object.assign({}, state, { permission: action.permission });
+    case LOCATION_ACTIONS.ON_LOCATION:
+      return Object.assign({}, state, { location: action.location });
     default: return state
   }
 }
@@ -63,6 +65,14 @@ const checkedPermissionAction = (permission:Permissions.PermissionResponse) => {
   return {
     type: LOCATION_ACTIONS.CHECKED_PERMISSION,
     permission
+  };
+}
+
+const onLocationAction = (location:any):iAddToCountAction => {
+  console.log('onLocationAction')
+  return {
+    type: LOCATION_ACTIONS.ON_LOCATION,
+    location
   };
 }
 
@@ -91,7 +101,7 @@ const checkPermission = () => {
   return async (dispatch:any) => {
     const permission = await Permissions.askAsync(Permissions.LOCATION)
     console.log(JSON.stringify(permission, null, 2))
-    checkedPermissionAction(permission)
+    dispatch(checkedPermissionAction(permission))
   }
 }
 
@@ -105,12 +115,35 @@ const getLocation = () => {
   };
 }
 
+/**
+ * watchPositionAsync
+ */
+const watchPosition = () => {
+  console.log('watchPosition')
+  return async(dispatch:any) => {
+    const watcher = await Location.watchPositionAsync({
+      enableHighAccuracy:true, // Hi
+      accuracy: Location.Accuracy.Highest,
+      timeInterval: 1000,
+      distanceInterval: 3,
+      mayShowUserSettingsDialog: true
+    }, (location) => {
+      console.log('location')
+      console.log(location)
+      dispatch(onLocationAction(location))
+    })
+    console.log('watcher')
+    console.log(watcher)
+  };
+}
+
 const locationModule = {
   initial,
   reducer,
   actionCreators: {
     checkPermission,
-    getLocation
+    getLocation,
+    watchPosition
   }
 }
 

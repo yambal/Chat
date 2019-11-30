@@ -9,6 +9,7 @@ import { DefaultTheme, Provider as PaperProvider, Button } from 'react-native-pa
 
 import Test from './container/Test'
 import Location from './container/Location'
+import NCode from './container/NCode';
 
 const theme = {
   ...DefaultTheme,
@@ -26,6 +27,7 @@ export default function App() {
       <PaperProvider theme={theme}>
         <Test />
         <Location />
+        <NCode />
       </PaperProvider>
     </Provider>
   );

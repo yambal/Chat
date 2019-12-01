@@ -1013,6 +1013,11 @@
     lodash "^4.5.0"
     prop-types "^15.6.1"
 
+"@yambal/n_code@^0.1.0":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@yambal/n_code/-/n_code-0.1.2.tgz#b9eb15fc10ac4e7fccc89c5ef65135d32911bf11"
+  integrity sha512-jnTiULDjF3KIyysE23AS3gNXvGLdMQFZU59fCTuaPSsFkS9ndItPDfJqbAcN1IsRWsFuQTW+4xeUcv8eI1VPPw==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -2966,11 +2971,6 @@ jest-worker@^24.0.0-alpha.6:
   dependencies:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
-
-jp-ncode@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/jp-ncode/-/jp-ncode-0.0.8.tgz#5a2331efeee6591d3bd16e23c1436afd88143f2d"
-  integrity sha512-7PxiBiTcNl3pbY8IA7OiulxFNl3DKGJFYVHYd2JJB4wT0QKHgZ/YuF4scfNd7AMxz/YDrFRI726ggvaCUdKPXA==
 
 js-levenshtein@^1.1.3:
   version "1.1.6"
